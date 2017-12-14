@@ -1,0 +1,47 @@
+div.container {
+    margin: 1em;
+}
+
+div.employment-header > div{
+    font-size: 1em;
+    font-weight: bolder;
+    display: block;
+}
+
+div.employment-header {
+    margin-top: 0em;
+}
+
+div.employment-header > div.employment-title {
+    float: left;
+}
+
+div.employment-header > div.employment-date {
+    float: right;
+}
+
+div.employment-body {
+    clear: left;
+    padding-top: 0em;
+}
+
+div.employment-body > ul > li {
+    padding: 0.1em;
+}
+
+div.section-header > h2 {
+    margin: 0em;
+}
+
+h1.name-header {
+    font-size: 2em;
+    font-weight: bolder;
+    margin: 0em;
+}
+
+ul {
+    padding-bottom: 0.1em;
+    padding-left: 0.5em;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+}
