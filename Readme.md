@@ -11,3 +11,4 @@ This code is meant to be educational and is not recommended for use elsewhere.
 In developing this resume, I drew from the following resources:
 * [Deathmood: How to write your own Virtual DOM](https://medium.com/@deathmood/how-to-write-your-own-virtual-dom-ee74acc13060)
 * [JASON Format: WTF is JSX](https://jasonformat.com/wtf-is-jsx/)
+* [Hackernoon: Build Your Own React](https://hackernoon.com/build-your-own-react-48edb8ed350d)
