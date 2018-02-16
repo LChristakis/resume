@@ -1,18 +1,24 @@
 let LChristakisResumeJSON = {};
-XHR('/LChristakisResume.json',function(data){
-    LChristakisResumeJSON = JSON.parse(data);
-    let vdom = buildResume(LChristakisResumeJSON);
-    
-    document.body.appendChild(render(vdom));
 
-});
+let xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4 && xhr.status === 200){
+        LChristakisResumeJSON = JSON.parse(xhr.responseText);
+        let vdom = buildResume(LChristakisResumeJSON);
+        document.body.appendChild(render(vdom));
+    }
+}
+xhr.open('GET','/LChristakisResume.json',true);
+xhr.send();
 
 function buildResume(resumeData){
     return (
         node('div',{class: 'container'},[
             node('h1',{class: 'container'},['LUKE CHRISTAKIS']),
             node('span',{},['561-302-4184 | LChristakis@gmail.com | LukeChristakis.com | github.com/LChristakis']),
-            buildSection('SKILLS','qualifications',buildSkillBody.bind(null,resumeData.skillsets))
+            buildSection('SKILLS','qualifications',buildSkillBody.bind(null,resumeData.skillsets)),
+            buildSection('EMPLOYMENT HISTORY','employment',buildEmploymentBody.bind(null,resumeData.employment)),
+            buildSection('EDUCATION','education',buildEducationBody.bind(null,resumeData.education))
         ])
     );
 }
@@ -26,21 +32,66 @@ function buildSection(sectionTitle,sectionClass,sectionBodyCallback){
             node('div',{class: 'section-body'},[
                 sectionBodyCallback()
             ])
-	])
+    ])
     )
 }
 
 function buildSkillBody(skillsets) {
     return (
         node('ul',{},
-            skillsets.map( function(skillset){ 
-		var title = skillset.title;
-		var skills = skillset.skills.join(',');
-		return node('li',{},[
+            skillsets.map( function(skillset){
+                var title = skillset.title;
+                var skills = skillset.skills.join(',');
+                return node('li',{},[
                     node('b',{},[title]),
-                    ' : ', skills
+                    ' : '+skills
                 ]);
-	    })
+        })
+        )
+    );
+}
+
+function buildEmploymentBody(positions){
+    return (
+        node('div',{class: 'positions'},
+            positions.map( function(position){
+                position.end_year = position.end_year === null ? 'Present' : position.end_year;
+                return(
+                    node('div',{class: 'position'},[
+                        node('div',{class: 'employment-header'},[
+                            node('div',{class: 'employment-title'},[position.title+', '+position.company]),
+                            node('div',{class: 'employment-date'},[position.start_year+'-'+position.end_year])
+                        ]),
+                        node('div',{class: 'employment-body'},[
+                            buildPositionAccomplishments(position.accomplishments)
+                        ])
+                    ])
+                )
+            })
+        )
+    );
+}
+
+function buildPositionAccomplishments(accomplishments){
+    return (
+        node('ul',{},
+            accomplishments.map( function(accomplishment){
+                return node('li',{},[accomplishment])
+            })
+        )
+    );
+}
+
+function buildEducationBody(degrees){
+    return (
+        node('ul',{},
+            degrees.map(function(degree){
+                return (
+                    node('li',{},[
+                        node('b',{},[degree.school,' '+degree.degree+', '+degree.field+', '+degree.GPA])
+                    ])
+                )
+            })
         )
     );
 }
