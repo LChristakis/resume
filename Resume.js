@@ -14,7 +14,7 @@ xhr.send();
 function buildResume(resumeData){
     return (
         node('div',{class: 'container'},[
-            node('h1',{class: 'container'},['LUKE CHRISTAKIS']),
+            node('h1',{},['LUKE CHRISTAKIS']),
             node('span',{},['561-302-4184 | LChristakis@gmail.com | LukeChristakis.com | github.com/LChristakis']),
             buildSection('SKILLS','qualifications',buildSkillBody.bind(null,resumeData.skillsets)),
             buildSection('EMPLOYMENT HISTORY','employment',buildEmploymentBody.bind(null,resumeData.employment)),
