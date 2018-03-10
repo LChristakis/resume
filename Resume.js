@@ -8,7 +8,7 @@ xhr.onreadystatechange = function(){
         document.body.appendChild(render(vdom));
     }
 }
-xhr.open('GET','/LChristakisResume.json',true);
+xhr.open('GET','LChristakisResume.json',true);
 xhr.send();
 
 function buildResume(resumeData){
