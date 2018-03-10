@@ -1,3 +1,0 @@
-#!/bin/bash
-#Host our files on a VERY simple local http server so we can fetch json without Chrome nagging us about XSS attacks...
-nohup python -m SimpleHTTPServer &
